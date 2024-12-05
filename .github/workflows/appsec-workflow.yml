@@ -1,4 +1,4 @@
-name: Security Scanning
+name: Appsec Workflow Checks
 
 on:
   push:

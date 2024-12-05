@@ -1,0 +1,21 @@
+name: Security Scanning
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+  
+jobs:
+  Gitleaks:
+    name: Gitleaks Scan
+    uses: ./.github/workflows/gitleaks-check.yml
+    secrets: inherit
+    
+  SonarCloud:
+     name: Sonar Cloud Scan
+     uses: ./.github/workflows/sonarcloud-check.yml
+     secrets: inherit
+  
+
+

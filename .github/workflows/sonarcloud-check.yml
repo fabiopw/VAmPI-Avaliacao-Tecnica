@@ -1,4 +1,4 @@
-name: Build
+name: Sonarcloud Check Scan
 on:
   push:
     branches:

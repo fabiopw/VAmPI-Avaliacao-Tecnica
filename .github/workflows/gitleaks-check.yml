@@ -1,0 +1,33 @@
+name: Gitleaks Check Scan
+
+on:
+  workflow_call:  # Permite que outros workflows chamem este
+
+jobs:
+  gitleaks-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Faz o checkout do repositório atual
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Checkout do repositório que contém o arquivo gitleaks.toml
+      - name: Checkout Gitleaks Config from security-workflow
+        uses: actions/checkout@v4
+        with:
+          repository: fabiopw/security-scanning
+          path: external-config  # Faz checkout do repositório em uma pasta chamada "external-config"
+          ref: main  # Opcional: especifica o branch se necessário
+          token: ${{ secrets.GH_PAT }}  # PAT com permissão de leitura para repositórios privados
+
+      # Executa o Gitleaks com o arquivo de configuração do repositório de configuração
+      - name: Run Gitleaks with External Config
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #gitleaks:allow
+          GITLEAKS_CONFIG: ${{ github.workspace }}/external-config/.github/gitleaks.toml 
+          # Caminho absoluto para o arquivo de configuração

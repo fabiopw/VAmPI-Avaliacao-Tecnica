@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Gitleaks Config from security-workflow
         uses: actions/checkout@v4
         with:
-          repository: fabiopw/security-scanning
+          repository: fabiopw/security-workflow
           path: external-config  # Faz checkout do repositório em uma pasta chamada "external-config"
           ref: main  # Opcional: especifica o branch se necessário
           token: ${{ secrets.GH_PAT }}  # PAT com permissão de leitura para repositórios privados

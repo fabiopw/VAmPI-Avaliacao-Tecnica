@@ -10,29 +10,29 @@ jobs:
 # SCAN HCC
   Gitleaks:
     name: Gitleaks Scan
-    uses: ./.github/workflows/appsec/gitleaks-check.yml
+    uses: ./.github/workflows/gitleaks-check.yml
     secrets: inherit
     
   TwoMS:
     name: 2MS Scan
-    uses: ./.github/workflows/appsec/twoms-check.yml
+    uses: ./.github/workflows/twoms-check.yml
     secrets: inherit
     
   Trufflehogg:
     name: Trufflehogg Scan
-    uses: ./.github/workflows/appsec/Trufflehogg-check.yml
+    uses: ./.github/workflows/Trufflehogg-check.yml
     secrets: inherit
 
 # SAST
   SonarCloud:
      name: Sonar Cloud Scan
-     uses: ./.github/workflows/appsec/sonarcloud-check.yml
+     uses: ./.github/workflows/sonarcloud-check.yml
      secrets: inherit
 
 # IAC
   trivy:
      name: trivy Cloud Scan
-     uses: ./.github/workflows/appsec/sonarcloud-check.yml
+     uses: ./.github/workflows/sonarcloud-check.yml
      secrets: inherit
 
 

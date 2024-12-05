@@ -29,5 +29,5 @@ jobs:
         env:
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #gitleaks:allow
-          GITLEAKS_CONFIG: ${{ github.workspace }}/external-config/.github/gitleaks.toml 
+          GITLEAKS_CONFIG: ${{ github.workspace }}/external-config/gitleaks.toml 
           # Caminho absoluto para o arquivo de configuração

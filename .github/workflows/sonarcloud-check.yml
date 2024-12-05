@@ -1,10 +1,11 @@
 name: Sonarcloud Check Scan
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_call:  # Permite que outros workflows chamem este
+  #push:
+  #  branches:
+  #    - main
+  #pull_request:
+  #  types: [opened, synchronize, reopened]
 jobs:
   sonarcloud:
     name: SonarQube Cloud

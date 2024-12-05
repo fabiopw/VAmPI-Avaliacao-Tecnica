@@ -2,7 +2,7 @@ name: Owasp Zap (DAST) Scan
 
 on:
   workflow_call:  # Permite que outros workflows chamem este
-
+  workflow_dispatch:
 jobs:
   dast-scan:
     name: OWASP ZAP DAST Scan

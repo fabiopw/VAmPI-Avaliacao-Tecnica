@@ -7,7 +7,7 @@ jobs:
   build:
     name: Trivy
     runs-on: ubuntu-20.04
-    permissions:
+    #permissions:
      #actions: write
      #ssues: write
      #ull-requests: write

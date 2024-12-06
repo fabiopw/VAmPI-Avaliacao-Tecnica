@@ -18,6 +18,18 @@ A melhor prática seria ter todo workflow de segurança em outro repositório, f
 Isso colabora com um melhor gerenciamento e uma manutenção mais segura apenas pelo time de AppSec.
 Neste teste todos os yml estão no diretório .github/workflows
 
+```
+└── workflows
+    ├── appsec-workflow.yml
+    ├── docker-image.yml
+    ├── gitleaks-check.yml
+    ├── owaspzap-check.yml
+    ├── sonarcloud-check.yml
+    ├── trivy-check.yml
+    ├── trufflehogg-check.yml
+    └── twoms-check.yml
+```
+
 
 ### Gitleaks
 Verifica a presença de segredos expostos no código fonte, como tokens, chaves de API e credenciais.

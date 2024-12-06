@@ -30,23 +30,29 @@ Neste teste todos os yml estão no diretório .github/workflows
     └── twoms-check.yml
 ```
 
+### AppsecWorkflow
+Responsável por orquestrar todos os scans e checagens.
 
 ### Gitleaks
 Verifica a presença de segredos expostos no código fonte, como tokens, chaves de API e credenciais.
 
 **Inputs Requeridos**:
-- `GH_PAT`: Token de acesso ao GitHub.
-- `GITLEAKS_LICENSE`: Licença para o Gitleaks.
+- `GITHUB_TOKEN`: Token de acesso ao GitHub.
+- `GITLEAKS_LICENSE`: Licença para o Gitleaks (Necessário para organizations).
 
-### SonarCloud
-Realiza análises de código estático para identificar problemas de segurança, bugs e vulnerabilidades.
+### OWASP ZAP
+Realiza análises de código dinamico (DAST) para identificar problemas de segurança, bugs e vulnerabilidades.
 
 **Inputs Requeridos**:
+- `GITHUB_TOKEN`: Token de acesso ao github.
+
+### OWASP ZAP
+Realiza análises de código estático (SAST) para identificar problemas de segurança, bugs e vulnerabilidades.
+
+**Inputs Requeridos**:
+- `GITHUB_TOKEN`: Token de acesso ao github.
 - `SONAR_TOKEN`: Token de autenticação para o SonarCloud.
 
-## Certifique-se de configurar os seguintes segredos no repositório onde o workflow principal será executado:
-
-- `GH_PAT`: Token de acesso ao GitHub.
-- `SONAR_TOKEN`: Token de autenticação para o SonarCloud.
-- `GITLEAKS_LICENSE`: Licença para o Gitleaks.
+### 2MS, Trivy e Trufflehogg
+Realiza análises em busca de secrets no código.
 

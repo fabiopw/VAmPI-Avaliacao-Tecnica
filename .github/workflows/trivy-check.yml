@@ -8,10 +8,10 @@ jobs:
     name: Trivy
     runs-on: ubuntu-20.04
     permissions:
-     actions: write
-     issues: write
-     pull-requests: write
-     contents: read
+     #actions: write
+     #ssues: write
+     #ull-requests: write
+     #ontents: read
      
     steps:
       - name: Checkout code

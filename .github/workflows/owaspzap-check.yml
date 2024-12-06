@@ -8,8 +8,8 @@ jobs:
     name: OWASP ZAP DAST Scan
     runs-on: ubuntu-latest
     permissions:
-      issues: write
-      pull-requests: write
+      issues: none
+      pull-requests: none
 
     steps:
       # Checkout do código (caso necessário)

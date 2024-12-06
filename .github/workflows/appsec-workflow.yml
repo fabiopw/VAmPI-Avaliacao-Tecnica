@@ -29,10 +29,10 @@ jobs:
      uses: ./.github/workflows/sonarcloud-check.yml
      secrets: inherit
 
-# IAC
-  trivy:
-     name: trivy Cloud Scan
-     uses: ./.github/workflows/sonarcloud-check.yml
+# DAST
+  OWASPZAP:
+     name: Owasp Zap Scan
+     uses: ./.github/workflows/owaspzap-check.yml
      secrets: inherit
 
 

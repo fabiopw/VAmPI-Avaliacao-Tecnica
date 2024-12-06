@@ -34,5 +34,7 @@ jobs:
      name: Owasp Zap Scan
      uses: ./.github/workflows/owaspzap-check.yml
      secrets: inherit
-
+     permissions:
+       issues: write  # Adicionando permissões para issues
+       pull-requests: write  # Adicionando permissões para pull-requests
 

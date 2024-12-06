@@ -53,6 +53,9 @@ Realiza análises de código estático (SAST) para identificar problemas de segu
 - `GITHUB_TOKEN`: Token de acesso ao github.
 - `SONAR_TOKEN`: Token de autenticação para o SonarCloud.
 
-### 2MS, Trivy e Trufflehogg
+### TRIVY
+Container Scan.
+
+### 2MS e Trufflehogg
 Realiza análises em busca de secrets no código.
 

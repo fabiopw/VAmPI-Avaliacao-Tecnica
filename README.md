@@ -46,7 +46,7 @@ Realiza análises de código dinamico (DAST) para identificar problemas de segur
 **Inputs Requeridos**:
 - `GITHUB_TOKEN`: Token de acesso ao github.
 
-### OWASP ZAP
+### SONARCLOUD
 Realiza análises de código estático (SAST) para identificar problemas de segurança, bugs e vulnerabilidades.
 
 **Inputs Requeridos**:

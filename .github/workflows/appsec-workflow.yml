@@ -38,7 +38,7 @@ jobs:
        issues: write  # Adicionando permissões para issues
        pull-requests: write  # Adicionando permissões para pull-requests
 
-# IAC
+# Container Scan
   TrivyScan:
      name: Trivy IaC Scan
      uses: ./.github/workflows/trivy-check.yml

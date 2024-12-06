@@ -20,7 +20,7 @@ jobs:
     
   Trufflehogg:
     name: Trufflehogg Scan
-    uses: ./.github/workflows/Trufflehogg-check.yml
+    uses: ./.github/workflows/trufflehogg-check.yml
     secrets: inherit
 
 # SAST

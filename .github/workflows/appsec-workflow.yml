@@ -1,51 +1,50 @@
 name: Appsec Workflow Checks
 
 on:
-  push:
-  pull_request:
-  workflow_dispatch:
-  workflow_call:
-  
+  push: {}
+  pull_request: {}
+  workflow_dispatch: {}
+  workflow_call: {}
+
 jobs:
-# SCAN HCC
+  # SCAN HCC
   Gitleaks:
-    name: Gitleaks Scan
+    name: "Gitleaks Scan"
     uses: ./.github/workflows/gitleaks-check.yml
     secrets: inherit
-    
+
   TwoMS:
-    name: 2MS Scan
+    name: "2MS Scan"
     uses: ./.github/workflows/twoms-check.yml
     secrets: inherit
-    
+
   Trufflehogg:
-    name: Trufflehogg Scan
+    name: "Trufflehogg Scan"
     uses: ./.github/workflows/trufflehogg-check.yml
     secrets: inherit
 
-# SAST
+  # SAST
   SonarCloud:
-     name: Sonar Cloud Scan
-     uses: ./.github/workflows/sonarcloud-check.yml
-     secrets: inherit
+    name: "Sonar Cloud Scan"
+    uses: ./.github/workflows/sonarcloud-check.yml
+    secrets: inherit
 
-# DAST
+  # DAST
   OWASPZAP:
-     name: Owasp Zap Scan
-     uses: ./.github/workflows/owaspzap-check.yml
-     secrets: inherit
-     permissions:
-       issues: write  # Adicionando permissões para issues
-       pull-requests: write  # Adicionando permissões para pull-requests
+    name: "OWASP ZAP Scan"
+    uses: ./.github/workflows/owaspzap-check.yml
+    secrets: inherit
+    permissions:
+      issues: write         # Permite criar/atualizar issues automaticamente
+      pull-requests: write    # Permite comentar em PRs
 
-# Container Scan
+  # Container Scan
   TrivyScan:
-     name: Trivy IaC Scan
-     uses: ./.github/workflows/trivy-check.yml
-     secrets: inherit
-     permissions:
-       actions: write
-       issues: write
-       pull-requests: write
-       contents: read
-
+    name: "Trivy IaC Scan"
+    uses: ./.github/workflows/trivy-check.yml
+    secrets: inherit
+    permissions:
+      actions: write
+      issues: write
+      pull-requests: write
+      contents: read

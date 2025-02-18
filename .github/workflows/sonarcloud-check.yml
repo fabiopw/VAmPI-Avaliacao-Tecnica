@@ -1,27 +1,42 @@
-name: Build
-
+name: Sonarcloud Check Scan
 on:
-  push:
-    branches:
-      - main
-
+  workflow_call:  # Permite que outros workflows chamem este
 
 jobs:
-  build:
-    name: Build and analyze
+  sonarcloud:
+    name: SonarQube Scan
     runs-on: ubuntu-latest
-    
+    services:
+      sonarqube:
+        image: sonarqube:latest
+        ports:
+          - 9000:9000
+        options: >-
+          --health-cmd="curl -f http://localhost:9000/api/system/health || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: SonarSource/sonarqube-scan-action@v4
+          fetch-depth: 0  # Shallow clones devem ser desabilitados para uma análise mais precisa
+      
+      # Aguarda o SonarQube estar pronto para receber requisições
+      - name: Aguardando SonarQube iniciar
+        run: |
+          echo "Aguardando SonarQube iniciar..."
+          until curl -s http://sonarqube:9000/api/system/status | grep -q "UP"; do
+            echo "Ainda não está pronto, aguardando 5 segundos..."
+            sleep 5
+          done
+          echo "SonarQube está pronto!"
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        with:
+          args: >
+            -Dsonar.host.url=http://sonarqube:9000
+            -Dsonar.scanner.skipJreProvisioning=true
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: SonarSource/sonarqube-quality-gate-action@v1
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

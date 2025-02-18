@@ -7,42 +7,54 @@ on:
   workflow_call: {}
 
 jobs:
-  # SCAN HCC
+  # 1) SCANS DE SEGREDOS (exemplo em paralelo)
   Gitleaks:
     name: "Gitleaks Scan"
     uses: ./.github/workflows/gitleaks-check.yml
     secrets: inherit
+    # Sem 'needs' => roda em paralelo com os demais que também não tenham 'needs'
 
   TwoMS:
     name: "2MS Scan"
     uses: ./.github/workflows/twoms-check.yml
     secrets: inherit
+    # Sem 'needs' => roda em paralelo com Gitleaks
 
   Trufflehogg:
     name: "Trufflehogg Scan"
     uses: ./.github/workflows/trufflehogg-check.yml
     secrets: inherit
+    # Sem 'needs' => roda em paralelo com Gitleaks e TwoMS
 
-  # SAST
+  # 2) SAST (exemplo: roda após terminar os scans de segredos)
   SonarCloud:
     name: "Sonar Cloud Scan"
     uses: ./.github/workflows/sonarcloud-check.yml
     secrets: inherit
+    needs: 
+      - Gitleaks
+      - TwoMS
+      - Trufflehogg
+    # 'needs' indica que só inicia este job após Gitleaks, TwoMS e Trufflehogg finalizarem com sucesso
 
-  # DAST
+  # 3) DAST (exemplo: roda após SAST)
   OWASPZAP:
     name: "OWASP ZAP Scan"
     uses: ./.github/workflows/owaspzap-check.yml
     secrets: inherit
+    needs: 
+      - SonarCloud
     permissions:
-      issues: write         # Permite criar/atualizar issues automaticamente
-      pull-requests: write    # Permite comentar em PRs
+      issues: write
+      pull-requests: write
 
-  # Container Scan
+  # 4) CONTAINER / IaC SCAN (exemplo: roda depois do DAST)
   TrivyScan:
     name: "Trivy IaC Scan"
     uses: ./.github/workflows/trivy-check.yml
     secrets: inherit
+    needs: 
+      - OWASPZAP
     permissions:
       actions: write
       issues: write

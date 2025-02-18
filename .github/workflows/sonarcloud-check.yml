@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones devem ser desabilitados para uma análise mais precisa
       - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.2.1
+        uses: SonarSource/sonarqube-scan-action@v4
         with:
           args: >
             -Dsonar.scanner.skipJreProvisioning=true

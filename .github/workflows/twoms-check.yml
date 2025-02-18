@@ -16,4 +16,5 @@ jobs:
       # ...
 
       - name: Run 2ms Scan
-        run: docker run -v $(pwd):/repo checkmarx/2ms:2.8.1 git /repo
+        run: docker run -v $(pwd):/repo checkmarx/2ms:2.8.1 git /repo --config /app/.2ms.yml
+

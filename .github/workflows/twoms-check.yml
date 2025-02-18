@@ -16,5 +16,5 @@ jobs:
       # ...
 
       - name: Run 2ms Scan
-        run: docker run -v $(pwd)/.2ms.yml:/app/.2ms.yml checkmarx/2ms  confluence --url https://checkmarx.atlassian.net/wiki    --spaces secrets --config /app/.2ms.yml
+        run: docker run -v $(pwd)/.2ms.yml:/app/.2ms.yml checkmarx/2ms  --config /app/.2ms.yml
 
